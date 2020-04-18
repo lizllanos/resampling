@@ -55,6 +55,7 @@ source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/
 
 source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/graphs.R", encoding = "UTF-8")
 
+
 if(isTRUE(nasa_power) & !file.exists(paste0(directorio_datos,"data_nasa.csv"))){
 object_empty <- download_nasa(main_dir,start_date,end_date,latitud,longitud)
 }
@@ -106,7 +107,7 @@ De acuerdo al remuestreo realizado a continuación se muestra como es el comport
 ```{r, echo=FALSE}
 
 data_resampling <- resampling(data_historic, pronostico, year_forecast)
-plot_clima_trim(data_trim, resampling_y)
+plot_clima_trim(data_historic, resampling_y,pronostico[1,1])
 
 ## Save escenaries(Opcional)
 dir.create(directorio_resultados)

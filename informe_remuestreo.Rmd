@@ -41,11 +41,9 @@ knitr::opts_chunk$set(message = FALSE)
 
 ```
 
-# Carga de los inputs
+# Introducción
 
-Aquí se cargan los archivos de entrada:
--Probabilidades
--Datos históricos
+Esta metodología conecta los pronósticos climáticos estacionales con los modelos de cultivo mediante la técnica de remuestreo. A continuación se muestran los resultados obtenidos al usar este proceso.
 
 ```{r nasa, include=FALSE}
 directorio_datos <- paste0(directorio, "/data/")
@@ -53,8 +51,11 @@ directorio_resultados <- paste0(directorio, "/resultados/")
 
 source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/donwload_nasa_daily.R", encoding = "UTF-8")
 
-object_empty <- download_nasa(main_dir,start_date,end_date,latitud,longitud)
+source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/resampling.R", encoding = "UTF-8")
 
+if(isTRUE(nasa_power) & !file.exists(paste0(directorio_datos,"data_nasa.csv"))){
+object_empty <- download_nasa(main_dir,start_date,end_date,latitud,longitud)
+}
 ```
 
 
@@ -75,7 +76,7 @@ pronostico <- read_csv(list.files(directorio_datos, full.names =T)[pos1])
 
 # Pronóstico probabilistico
 
-Aquí se observa el pronóstico
+Para realizar el remuestreo es necesario contar con un pronóstico probabilistico que abarque los próximos 2 trimestres. En este ejercicio se cuenta con el pronóstico ilustrativo para los trimestres Abr-May-Jun 2020 y Jul-Ago-Sep 2020
 
 ```{r pressure, echo=FALSE}
 as.data.frame(pronostico)
@@ -83,8 +84,8 @@ plot_prob(pronostico)
 
 ```
 
-# Análisis del clima histórico
-Aquí se observa el comportamiento histórico del clima
+# Información climática histórica
+El segundo componente importante para realizar el remuestreo es contar con información climática diaria del sitio de interés. Es importante tener en cuenta que se debe contar con al menos 30 años de historia para poder tener un comportamiento representativo del clima. A continuación se muestra como ha sido ese comportamiento de las diferentes variables climáticas:
 
 ```{r, echo=FALSE}
 head(as.data.frame(data_historic), 10)
@@ -95,16 +96,21 @@ plot_clima_hist(data_historic, localidad)
 
 # Remuestreo
 
-Aquí ya se corre el remuestreo
+Después de tener los inputs necesarios podemos proceder a realizar el remuestreo basado en el pronóstico probabilístico. **Nota:** Recuerde que las salidas de los 100 escenarios se guarda en  **`r directorio_resultados`**
+
+De acuerdo al remuestreo realizado a continuación se muestra como es el comportamiento de los escenarios generados comparado con el histórico trimestral
+
+
 ```{r, echo=FALSE}
-source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/resampling.R", encoding = "UTF-8")
 
 data_resampling <- resampling(data_historic, pronostico, year_forecast)
-plot_resampling(data_resampling, data_historic, localidad)
+plot_clima_trim(data_trim, resampling_y)
 
 ## Save escenaries(Opcional)
 dir.create(directorio_resultados)
-function_to_save(localidad, data_resampling, directorio_resultados)
+resampling_y = function_to_save(localidad, data_resampling, directorio_resultados)
 
 ```
+
+La siguiente gráfica nos indica los 5 años que representan las condiciones pronósticadas para cada uno de los trimestres evaluados 
 

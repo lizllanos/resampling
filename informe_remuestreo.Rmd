@@ -53,6 +53,8 @@ source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/
 
 source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/resampling.R", encoding = "UTF-8")
 
+source("https://raw.githubusercontent.com/lizllanos/foro-clim-resampling/master/graphs.R", encoding = "UTF-8")
+
 if(isTRUE(nasa_power) & !file.exists(paste0(directorio_datos,"data_nasa.csv"))){
 object_empty <- download_nasa(main_dir,start_date,end_date,latitud,longitud)
 }

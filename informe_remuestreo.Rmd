@@ -104,16 +104,21 @@ Después de tener los inputs necesarios podemos proceder a realizar el remuestre
 De acuerdo al remuestreo realizado a continuación se muestra como es el comportamiento de los escenarios generados comparado con el histórico trimestral
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE,fig.height = 5, fig.width = 8}
 
 data_resampling <- resampling(data_historic, pronostico, year_forecast)
-plot_clima_trim(data_historic, resampling_y,pronostico[1,1])
 
 ## Save escenaries(Opcional)
 dir.create(directorio_resultados)
 resampling_y = function_to_save(localidad, data_resampling, directorio_resultados)
 
+plot_clima_trim(data_historic, resampling_y,pronostico[1,1])
+
 ```
 
 La siguiente gráfica nos indica los 5 años que representan las condiciones pronósticadas para cada uno de los trimestres evaluados 
+
+```{r years, echo=FALSE, fig.height = 4, fig.width = 6}
+plot_years(resampling_y)
+```
 

@@ -77,7 +77,7 @@ pronostico <- read_csv(list.files(directorio_datos, full.names =T)[pos1])
 ```
 
 
-# Pronóstico probabilistico
+# Pronóstico probabilístico
 
 Para realizar el remuestreo es necesario contar con un pronóstico probabilistico que abarque los próximos 2 trimestres. En este ejercicio se cuenta con el pronóstico ilustrativo para los trimestres Abr-May-Jun 2020 y Jul-Ago-Sep 2020
 

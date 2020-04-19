@@ -13,6 +13,7 @@ output:
 ---
 
 ```{r MODIFICAR, include=FALSE}
+########## Ultima version ##############
 # Aqui se modifican las siguientes líneas
 
 year_forecast <- 2020 ### Año del pronóstico

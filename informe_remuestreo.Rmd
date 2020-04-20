@@ -17,9 +17,10 @@ output:
 # Aqui se modifican las siguientes líneas
 
 year_forecast <- 2020 ### Año del pronóstico
-localidad <- "Sitio_A" ### Nombre del sitio
+localidad <- "sitio_x" ### Nombre del sitio
 
-directorio <- "D:/OneDrive - CGIAR/Desktop/resampling" ### Este es el directorio donde se tienen los archivos de entrada y donde se guardarán los resultados
+directorio <- "D:/OneDrive - CGIAR/Desktop/resampling" ### Este es el directorio donde se tienen los archivos de entrada y donde se guardarán los 
+
 
 nasa_power <- TRUE ### Si desea descargar los datos diarios de NASA POWER ponga TRUE. Si ud desea trabajar con datos observados ponga FALSE
 
